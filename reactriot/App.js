@@ -34,6 +34,8 @@ constructor(props) {
   };
 }
 
+
+
 componentWillMount() {
     StatusBar.setHidden(true, 'fade');
   }
@@ -42,9 +44,15 @@ componentWillMount() {
     LayoutAnimation.spring();
   }
 
-onSubmit(){
-  console.log('hello')
+fun(){
+  var name=this.state.name
+  var email = this.state.email
+ if(typeof name==='string' && name.length>0 && email.length>10 )
+  {console.log('success');}
+else
+{this.setState({success: false})}
 }
+
  
 
   render() {
@@ -79,8 +87,10 @@ onSubmit(){
           label="Enter"
           noFill
           onPress={() => {
+            this.fun();
+            const success = this.state.success;
             if(success)
-            {this.b8.success();}
+            {console.log(success)}
             else{this.b8.error();
             this.setState({success: false})}
           }}
@@ -97,8 +107,8 @@ onSubmit(){
           errorIconColor={colors.red}
         />
 
-        {!success &&
-          <Text style={{ color: colors.red, marginLeft: 10 }}>
+        {success===false &&
+          <Text style={{ color:  '#EDB1F1', marginLeft: 10 }}>
             Oops! Please fill the form 
           </Text>}
   
