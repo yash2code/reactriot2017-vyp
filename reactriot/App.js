@@ -5,22 +5,53 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback
+  StatusBar,
+  LayoutAnimation
 } from "react-native";
 import {
   Kaede
 } from 'react-native-textinput-effects';
+import Button from 'react-native-micro-animated-button';
 
-
+const colors = {
+  blue: '#4285f4',
+  gray: '#d8d8d8',
+  grayDark: '#444',
+  green: '#0f9d58',
+  red: '#db4437',
+  white: 'white'
+};
 
  export default class App extends Component{
 
+constructor(props) {
+  super(props);
+
+  this.state = {
+    success:true,
+    name:'',
+    email:''
+  };
+}
+
+componentWillMount() {
+    StatusBar.setHidden(true, 'fade');
+  }
+
+  componentWillUpdate() {
+    LayoutAnimation.spring();
+  }
+
+onSubmit(){
+  console.log('hello')
+}
  
 
   render() {
+    const {success} = this.state
     return(
     <View style={styles.container}>
+    
    <Kaede
     style={styles.input}     
     label={'Name'}
@@ -28,7 +59,8 @@ import {
     autoCorrect={false}
     labelStyle={{ color: 'white',backgroundColor:'#9896F1' }}
     inputStyle={{ color: '#EDB1F1' }}
-        borderColor={'red'}
+    borderColor={'red'}
+    onChangeText={(name) => this.setState({name})}
   />
    <Kaede
     style={styles.inputmail}     
@@ -38,7 +70,39 @@ import {
     labelStyle={{ color: 'white',backgroundColor:'#9896F1' }}
     inputStyle={{ color: '#EDB1F1' }}
     keyboardType="email-address"
+    onChangeText={(email) => this.setState({email})}
   />
+  <View style={{alignItems: "center"}}>
+   <Button
+          
+          foregroundColor={colors.blue}
+          label="Enter"
+          noFill
+          onPress={() => {
+            if(success)
+            {this.b8.success();}
+            else{this.b8.error();
+            this.setState({success: false})}
+          }}
+          onSecondaryPress={() => {
+            this.b8.reset();
+           // this.setState({ success: false });
+          }}
+          ref={ref => (this.b8 = ref)}
+         
+          successColor={colors.blue}
+          successIconColor={colors.blue}
+          successIconName="thumbs-up"
+          errorIconName="remove"
+          errorIconColor={colors.red}
+        />
+
+        {!success &&
+          <Text style={{ color: colors.red, marginLeft: 10 }}>
+            Oops! Please fill the form 
+          </Text>}
+  
+    </View>
       </View>
     );
   }
