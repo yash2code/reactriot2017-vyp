@@ -5,7 +5,8 @@ import {
   View,
   TextInput,
   StatusBar,
-  LayoutAnimation
+  LayoutAnimation,
+  KeyboardAvoidingView
 } from "react-native";
 import {
   Kaede
@@ -59,7 +60,11 @@ else
     const {navigate} = this.props.navigation
     console.log(navigate)
     return(
-    <View >
+    <View>
+      <KeyboardAvoidingView
+          keyboardOffset={-500}
+          behavior={'position'}
+        >
     
    <Kaede
     style={styles.input}     
@@ -82,6 +87,7 @@ else
     onChangeText={(email) => this.setState({email})}
   />
   <View style={{alignItems: "center"}}>
+ 
    <Button
           
           foregroundColor={colors.blue}
@@ -113,8 +119,10 @@ else
           <Text style={{ color:  '#EDB1F1', marginLeft: 10 }}>
             Oops! Please fill the form 
           </Text>}
+        
   
     </View>
+   </KeyboardAvoidingView>
       </View>
     );
   }
