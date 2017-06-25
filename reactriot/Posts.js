@@ -10,11 +10,12 @@ static navigationOptions = {
  render() {
  	const { navigate } = this.props.navigation
 
- 		return(
+ 		return
+ 		(
  				<View>
- 				<Text>Hello</Text>
+ 				<Text>Coming Soon</Text>
  				</View>
- 	)
+ 				 		
  	}
 
 }
@@ -22,7 +23,7 @@ static navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  //  alignItems: "center",
+    alignItems: "center",
     //justifyContent: "center",
     backgroundColor:"#7EFFDB"
   },
