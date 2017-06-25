@@ -1,118 +1,37 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
+import { TabNavigator } from "react-navigation"
 import {
-  Animated,
-  StyleSheet,
-  Text,
   View,
-  TextInput,
-  StatusBar,
-  LayoutAnimation
-} from "react-native";
-import {
-  Kaede
-} from 'react-native-textinput-effects';
-import Button from 'react-native-micro-animated-button';
+  StyleSheet,
+  Dimensions
+} from "react-native"
+import Login from './Login'
+import Posts from './Posts'
 
-const colors = {
-  blue: '#4285f4',
-  gray: '#d8d8d8',
-  grayDark: '#444',
-  green: '#0f9d58',
-  red: '#db4437',
-  white: 'white'
-};
+const MainScreenNavigator = TabNavigator({
+  Initial: { screen: Login },
+ Posts : { screen: Posts}
+  
+}, {
+  navigationOptions: {
+  tabBarVisible: false,
+
+ },
+  swipeEnabled:false,
+
+ 
+});
 
  export default class App extends Component{
-
-constructor(props) {
-  super(props);
-
-  this.state = {
-    success:true,
-    name:'',
-    email:''
-  };
-}
-
-
-
-componentWillMount() {
-    StatusBar.setHidden(true, 'fade');
-  }
-
-  componentWillUpdate() {
-    LayoutAnimation.spring();
-  }
-
-fun(){
-  var name=this.state.name
-  var email = this.state.email
- if(typeof name==='string' && name.length>0 && email.length>10 )
-  {console.log('success');}
-else
-{this.setState({success: false})}
-}
 
  
 
   render() {
-    const {success} = this.state
+   
     return(
     <View style={styles.container}>
     
-   <Kaede
-    style={styles.input}     
-    label={'Name'}
-    autoCapitalize={'none'}
-    autoCorrect={false}
-    labelStyle={{ color: 'white',backgroundColor:'#9896F1' }}
-    inputStyle={{ color: '#EDB1F1' }}
-    borderColor={'red'}
-    onChangeText={(name) => this.setState({name})}
-  />
-   <Kaede
-    style={styles.inputmail}     
-    label={'Email'}
-     autoCapitalize={'none'}
-    autoCorrect={false}
-    labelStyle={{ color: 'white',backgroundColor:'#9896F1' }}
-    inputStyle={{ color: '#EDB1F1' }}
-    keyboardType="email-address"
-    onChangeText={(email) => this.setState({email})}
-  />
-  <View style={{alignItems: "center"}}>
-   <Button
-          
-          foregroundColor={colors.blue}
-          label="Enter"
-          noFill
-          onPress={() => {
-            this.fun();
-            const success = this.state.success;
-            if(success)
-            {console.log(success)}
-            else{this.b8.error();
-            this.setState({success: false})}
-          }}
-          onSecondaryPress={() => {
-            this.b8.reset();
-           // this.setState({ success: false });
-          }}
-          ref={ref => (this.b8 = ref)}
-         
-          successColor={colors.blue}
-          successIconColor={colors.blue}
-          successIconName="thumbs-up"
-          errorIconName="remove"
-          errorIconColor={colors.red}
-        />
-
-        {success===false &&
-          <Text style={{ color:  '#EDB1F1', marginLeft: 10 }}>
-            Oops! Please fill the form 
-          </Text>}
-  
-    </View>
+      <MainScreenNavigator style={{ width: Dimensions.get('window').width }}/>
       </View>
     );
   }
@@ -125,14 +44,6 @@ const styles = StyleSheet.create({
     //justifyContent: "center",
     backgroundColor:"#7EFFDB"
   },
-  input: {
-
-    marginTop:250,
-  },
-   inputmail: {
-
-    marginTop:5
-  }
-  
+ 
   });
 
